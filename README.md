@@ -38,7 +38,7 @@ This repository provides data for the problem and code for the method. The main 
 ## Data
 
 - The raw data used in our study can be downloaded from [Kaggle](https://www.kaggle.com/competitions/ieee-fraud-detection/data). The process of feature engineering is documented on [GitHub](https://github.com/xiaoluoyfy/IEEE-CIS-Fraud-Detection/) (note that variables derived from regions have been removed). The cleaned dataset is available in the data folder.
-- A demo dataset is also provided for quick start.
+- A demo dataset is also provided for a quick start.
 
 ## Replicating
 

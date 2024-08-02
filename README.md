@@ -128,7 +128,7 @@ print(cal_criteria(beta_pu_grplasso, beta_true, M, p0, X_test, Y_test, Z_test, p
 
 ## Contact & Support
 
-Please contact Qiu Yongqin via qiuyongqin@ustc.edu.cn for support in using this software or questions about the paper.
+Please contact Qiu Yongqin at qiuyongqin@ustc.edu.cn for support in using this software or for questions about the paper.
 
 ## Reference
 

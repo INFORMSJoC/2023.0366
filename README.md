@@ -42,7 +42,7 @@ This repository provides data for the problem and code for the method. The main 
 
 The `code` folder contains all the code which implements the framework of this paper. 
 
-* `I-PU.R` contains functions for building and optimizing the I-PU model
+* `I-PU.R` contains functions for building and optimizing the I-PU model.
 * Comparison Methods
   - `single model.R` includes several single models, and their estimation results can be selected as initial values for a warm start. To implement the code, you need to install the R packages **glmnet**, **PUlasso**, **ncvreg**, and **grpreg**.
   - `Oracle.R` includes functions for calculating the Oracle model.

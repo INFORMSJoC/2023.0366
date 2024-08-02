@@ -14,7 +14,7 @@ data_generate = function(seed, example, p0){
 
   p = p0 + 1
   if (example == 1){
-    important_coef = 8
+    important_pos = 1:16
     M  = 10
     n  = 200
     nu = rep(n/2, M)
@@ -36,7 +36,7 @@ data_generate = function(seed, example, p0){
   else if (example == 2){
     M=10
     n=200
-    important_coef = 10
+    important_pos = c(1,2,3,4,5,6,8,9,11,12,14,15,18,20)
     nu=rep(n/2,M)
     nl=rep(n/2,M)
     pi=rep(0,M)
@@ -60,7 +60,7 @@ data_generate = function(seed, example, p0){
     beta_true[10, ]=c(rep(c(-1, 0.5, -0.5, 0, 0.75),c(2, 1, 1, 4, 2)), rep(0, p0-10))
   }
   else if (example == 3){
-    important_coef = 8
+    important_pos = 1:16
     M = 20
     n = 100
     nu = rep(n/2, M)
@@ -144,7 +144,7 @@ data_generate = function(seed, example, p0){
                Z_test = Z_test,
                Z_valid = Z_valid,
                group_all = group_all,
-               important_coef = important_coef
+               important_pos = important_pos
   ))
 }
 

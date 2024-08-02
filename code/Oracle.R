@@ -31,15 +31,16 @@ cal_W = function(p0, beta_true){
 }
 
 
-oracle_model = function(important_coef, Y, X_m, Z, beta_true, p0, M){
+oracle_model = function(important_pos, Y, X_m, Z, beta_true, p0, M){
   X_bd = as.matrix(bdiag(X_m))
   W = cal_W(p0, beta_true)
   X_or = X_bd %*% W
-  X_use = X_or[, 1 : (2*important_coef)]
+  X_use = X_or[, important_pos]
   Y_vec = do.call('c', Y)
-  oracle = glmnet(X_use, Y_vec, family = 'binomial', lambda=0, intercept = F)
-  oracle = as.vector(coef(oracle)[2 : (2*important_coef+1)])
-  oracle = c(oracle, rep(0, p0-important_coef))
+  oracle_important = glmnet(X_use, Y_vec, family = 'binomial', lambda=0, intercept = F)
+  oracle_important = as.vector(coef(oracle_important)[-1])
+  oracle = rep(0,dim(W)[2])
+  oracle[important_pos] = oracle_important
   oracle = W%*%oracle
   oracle = matrix(oracle, M, p0, byrow = T)
   oracle = cbind(rep(0, M), oracle)

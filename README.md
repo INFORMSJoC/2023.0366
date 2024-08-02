@@ -134,6 +134,5 @@ Please contact Qiu Yongqin via qiuyongqin@ustc.edu.cn for support in using this 
 
 ## Reference
 
-1. Duan, Y. and Wang, K., 2023. Adaptive and robust multi-task learning. The Annals of Statistics, 51(5), pp.2015-2039.
-2. Cao H, Zhou J, Schwarz E, 2019. RMTL: an R library for multi-task learning. Bioinformatics, 35(10), pp.1797–1798.  
-
+1. Duan Y, Wang K (2023) Adaptive and robust multi-task learning. The Annals of Statistics 51(5):2015–2039.  
+2. Cao H, Zhou J, Schwarz E (2019) RMTL: an R library for multi-task learning. Bioinformatics 35(10):1797–1798.  

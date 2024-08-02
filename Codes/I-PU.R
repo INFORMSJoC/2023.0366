@@ -12,22 +12,22 @@ entrywise_prod<-function(A,b){
   return(A)
 }
 
-# Defination of MCP: Used for the inner sum of group MCP
+# Calculate MCP penalty
 MCP_penalty<-function(beta,lambda,a){
   return(ifelse(beta <= a*lambda, lambda*beta-beta^2/(2*a), 0.5*a*lambda^2))
 }
-# first derivative of MCP
+# Calculate the first derivative of the MCP penalty.
 MCP_D<-function(beta,lambda,a){
   return(ifelse(beta<a*lambda,lambda-beta/a,0))
 }
-# calculate the CMCP
+# Calculate the CMCP.
 CMCP<-function(beta, lambda, a){
   pj= length(beta)
   b = 0.5*a*pj*lambda
   mu=MCP_D(sum(MCP_penalty(abs(beta), lambda,  a)), lambda,b) *MCP_D(abs(beta), lambda, a)
   return(mu)
 }
-# calculate CMCP of each group
+# Calculate the CMCP for each group.
 CMCP_G <- function(x,group,lambda, a){
   res=tapply(x, group, CMCP, lambda=lambda, a = a)
   if(is.list(res)){
@@ -37,7 +37,7 @@ CMCP_G <- function(x,group,lambda, a){
     return(res)
   }
 }
-# updata phi of each group
+# Update phi for each group.
 up_phi<-function(xi,lambda,rho1,a){
   xi_norm=sqrt(sum(xi^2))
   if(xi_norm<=a*lambda){
@@ -45,7 +45,7 @@ up_phi<-function(xi,lambda,rho1,a){
   }
   return(xi)
 }
-# the function is used to calculate phi, psi and Delta
+# This function is used to calculate phi, psi, and Delta.
 cal_diff<-function(M,p,beta,type=1){
   # type=1 is used for calculate phi and psi, type=2 is used to calculate Delta
   index=1
@@ -55,7 +55,6 @@ cal_diff<-function(M,p,beta,type=1){
       for(l in (m+1):M){
         result[index,]=beta[m,]-beta[l,]
         index=index+1
-        
       }
     }
   }
@@ -66,13 +65,12 @@ cal_diff<-function(M,p,beta,type=1){
         result[index,m]=1
         result[index,l]=-1
         index=index+1
-        
       }
     }
   }
   return(result)
 }
-# this function is used to update phi 
+# This function is used to update phi. 
 up_phi_group <- function(xi,group,lambda,rho1, a){
   res = tapply(xi, group, up_phi, lambda = lambda, rho1 = rho1, a = a)
   if(is.list(res)){
@@ -82,17 +80,8 @@ up_phi_group <- function(xi,group,lambda,rho1, a){
     return(res)
   }
 }
-get_beta0<-function(M,sample_size,N,T_m,X_m,p){
-  beta=matrix(0,M,p)
-  for(m in 1:M){
-    CV<-cv.ncvreg(X_m[[m]],T_m[[m]],family = 'gaussian',penalty = 'MCP',nfolds=3,nlambda=20)
-    lambdamin=CV$lambda.min
-    beta[m,]=CV$fit$beta[,which(CV$fit$lambda==lambdamin)][2:(p+1)] 
-  }
-  return(beta)
-}
 
-# calculate the expectation of y and get mu
+# Calculate the expectation of y.
 E_step<-function(X,Z,beta,M,pi,nl,nu){
   omega = Z 
   mu = Z
@@ -107,6 +96,7 @@ E_step<-function(X,Z,beta,M,pi,nl,nu){
   }
   return(T_m)
 }
+# M-step
 M_step_group<-function(beta,X,T_m,I_bd,G,A,sample_size,N,M,p,group,lambda1,lambda2, a ,rho1=1,rho2=1){
   T_m_vec = do.call('c', T_m)
   IXY = 1/N*I_bd%*%(entrywise_prod(X,T_m_vec))
@@ -144,7 +134,6 @@ genI<-function(sample_size){
   return(Ilist)
 }
 # generate G_extend
-
 gen_G_extend<-function(G,sample_size,M,N){
   G_extend<-matrix(0,N,N)
   for(m in 1 : M){
@@ -167,7 +156,6 @@ gen_G_extend<-function(G,sample_size,M,N){
   
   return(G_extend)
 }
-
 
 
 I_PU <- function(beta_hat,X_m,X,Z,I_bd,G,A,M,pi,N,p,group,lambda1,lambda2,loop,a = 3,rho1=1,rho2=1){
@@ -194,10 +182,6 @@ I_PU <- function(beta_hat,X_m,X,Z,I_bd,G,A,M,pi,N,p,group,lambda1,lambda2,loop,a
     
     iter = iter+1
     res = norm(beta_hat-beta_pre,'F')
-    # if(iter%%50 == 0){
-    #   print(res)
-    # }
-    # 
     if(res < 10^-4 | iter > loop){
       return(beta_hat)
       break
@@ -210,12 +194,12 @@ I_PU_train<- function(beta_hat,X_m,X,Z,X_valid,Y_valid,Z_valid,sample_size,M,pi,
   tune_seq = expand.grid(lambda1_seq, lambda2_seq)
   dev_mat=matrix(0, nrow(tune_seq), M)
   beta_IPU_list=list()
-  X_bd = as.matrix(bdiag(X_m))# calculate the bdiag of X_m
-  X = do.call('rbind', X_m)# Patch X_m by rows
+  X_bd = as.matrix(bdiag(X_m))# Calculate the block diagonal of X_m.
+  X = do.call('rbind', X_m)# Concatenate X_m by rows.
   I_bd = as.matrix(bdiag(genI(sample_size)))
-  G = (diag(1, M)+rho1*matrix(1, M, M)/rho2)/(M*rho1 + rho2)# G is define in Remark2
+  G = (diag(1, M)+rho1*matrix(1, M, M)/rho2)/(M*rho1 + rho2)#G is defined in Remark 2.
   G_extend = gen_G_extend(G, sample_size, M, N)
-  A = solve(diag(N)+1/N*hadamard.prod((X%*%t(X)), G_extend))#### A is the part of the beta update that involves solving for the inverse, and is presented separately to avoid duplicating calculations
+  A = solve(diag(N)+1/N*hadamard.prod((X%*%t(X)), G_extend))# A is the part of the beta update that involves matrix inversion.
   # train model
   for(i in nrow(tune_seq) : 1){
     beta_IPU = I_PU(beta_hat,X_m,X,Z, I_bd,G,A,M,pi,N,p,group[-1],

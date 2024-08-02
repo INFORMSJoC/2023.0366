@@ -66,7 +66,7 @@ pu_group<-function(X, Z, pi, init_value, lambda, group){
   
 }
 
-# single_model: This function applies each of the six specified models to individual datasets separately
+# single_model: This function applies each of the six models to individual datasets separately.
 single_model = function(M, Y, X_m, Z, p, pi, group, Y_test, Z_test, X_test){
   # lr_lasso
   beta_lr_lasso = matrix(0, M, p) 

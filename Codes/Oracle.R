@@ -1,6 +1,6 @@
 ### Oracle: In the oracle method, it is assumed that true responses and cluster structures are known, and then a logistic model is constructed
 
-# W is define in 5.1
+# W is defined in 5.1
 cal_W = function(p0, beta_true){
   s=rep(0, p0)
   for(i in 1 : p0){

@@ -87,7 +87,6 @@ Y = Data$Y; Y_test = Data$Y_test;  Y_valid = Data$Y_valid
 X_test = Data$X_test; X_valid = Data$X_valid
 Z = Data$Z; Z_test = Data$Z_test; Z_valid = Data$Z_valid
 group = Data$group
-important_coef = Data$important_coef
 ```
 
 ### Obtain the initial values

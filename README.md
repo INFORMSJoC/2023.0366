@@ -47,7 +47,7 @@ The `codes` folder contains all the code which implements the framework of this 
   - `single model.R` includes several single models, and their estimation results can be selected as initial values for a warm start. To implement the code, you need to install the R packages **glmnet**, **PUlasso**, **ncvreg**, and **grpreg**.
   - `Oracle.R` includes functions for calculating the Oracle model.
   - `I-LR.R` contains functions for calculating the I-LR model.
-  - `PYMTL.ipynb` contains functions for calculating the Clustered-LR, Lowrank-LR, and AR-LR models. The code implements the method from Duan, Y. and Wang, K (2023)[^1]. To ensure the code runs correctly, you need to download the **ARMUL.py** and **MTL.py** files from the GitHub repository at https://github.com/kw2934/armul and install the required Python packages.
+  - `PYMTL.py` contains functions for calculating the Clustered-LR, Lowrank-LR, and AR-LR models. The code implements the method from Duan, Y. and Wang, K (2023)[^1]. To ensure the code runs correctly, you need to download the **ARMUL.py** and **MTL.py** files from the GitHub repository at https://github.com/kw2934/armul and install the required Python packages.
   - `RMTL.R` contains the function for calculating the Sparse-LR model[^2]. To implement the code, you need to install the R package **RMTL**.
 * `criteria.R` contains functions for calculating evaluation criteria.
 * `data_generate.R` contains the data generators for the three examples used in the simulation.

@@ -12,7 +12,7 @@ Below is the BibTex for citing this snapshot of the repository.
 
 ```
 @misc{CacheTest,
-  author =        {Qiu, Yongqin and Chen, Yuanxing and Fang, Kan and Yu, Lean and Fang, Kuangnan},
+  author =        {Y. Qiu, Y. Chen, K. Fang, L. Yu, and K. Fang},
   publisher =     {INFORMS Journal on Computing},
   title =         {Fraud detection by integrating multisource
 heterogeneous presence-only data},

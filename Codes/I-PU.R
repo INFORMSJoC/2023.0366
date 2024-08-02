@@ -16,18 +16,18 @@ entrywise_prod<-function(A,b){
 MCP_penalty<-function(beta,lambda,a){
   return(ifelse(beta <= a*lambda, lambda*beta-beta^2/(2*a), 0.5*a*lambda^2))
 }
-# Calculate the first derivative of the MCP penalty.
+# Calculate the first derivative of the MCP penalty
 MCP_D<-function(beta,lambda,a){
   return(ifelse(beta<a*lambda,lambda-beta/a,0))
 }
-# Calculate the CMCP.
+# Calculate the CMCP
 CMCP<-function(beta, lambda, a){
   pj= length(beta)
   b = 0.5*a*pj*lambda
   mu=MCP_D(sum(MCP_penalty(abs(beta), lambda,  a)), lambda,b) *MCP_D(abs(beta), lambda, a)
   return(mu)
 }
-# Calculate the CMCP for each group.
+# Calculate the CMCP for each group
 CMCP_G <- function(x,group,lambda, a){
   res=tapply(x, group, CMCP, lambda=lambda, a = a)
   if(is.list(res)){
@@ -37,7 +37,7 @@ CMCP_G <- function(x,group,lambda, a){
     return(res)
   }
 }
-# Update phi for each group.
+# Update phi for each group
 up_phi<-function(xi,lambda,rho1,a){
   xi_norm=sqrt(sum(xi^2))
   if(xi_norm<=a*lambda){
@@ -45,7 +45,7 @@ up_phi<-function(xi,lambda,rho1,a){
   }
   return(xi)
 }
-# This function is used to calculate phi, psi, and Delta.
+# This function is used to calculate phi, psi, and Delta
 cal_diff<-function(M,p,beta,type=1){
   # type=1 is used for calculate phi and psi, type=2 is used to calculate Delta
   index=1
@@ -70,7 +70,7 @@ cal_diff<-function(M,p,beta,type=1){
   }
   return(result)
 }
-# This function is used to update phi. 
+# This function is used to update phi
 up_phi_group <- function(xi,group,lambda,rho1, a){
   res = tapply(xi, group, up_phi, lambda = lambda, rho1 = rho1, a = a)
   if(is.list(res)){
@@ -81,7 +81,7 @@ up_phi_group <- function(xi,group,lambda,rho1, a){
   }
 }
 
-# Calculate the expectation of y.
+# Calculate the expectation of y
 E_step<-function(X,Z,beta,M,pi,nl,nu){
   omega = Z 
   mu = Z
@@ -194,12 +194,12 @@ I_PU_train<- function(beta_hat,X_m,X,Z,X_valid,Y_valid,Z_valid,sample_size,M,pi,
   tune_seq = expand.grid(lambda1_seq, lambda2_seq)
   dev_mat=matrix(0, nrow(tune_seq), M)
   beta_IPU_list=list()
-  X_bd = as.matrix(bdiag(X_m))# Calculate the block diagonal of X_m.
+  X_bd = as.matrix(bdiag(X_m))# Calculate the block diagonal of X_m
   X = do.call('rbind', X_m)# Concatenate X_m by rows.
   I_bd = as.matrix(bdiag(genI(sample_size)))
-  G = (diag(1, M)+rho1*matrix(1, M, M)/rho2)/(M*rho1 + rho2)#G is defined in Remark 2.
+  G = (diag(1, M)+rho1*matrix(1, M, M)/rho2)/(M*rho1 + rho2)#G is defined in Remark 2
   G_extend = gen_G_extend(G, sample_size, M, N)
-  A = solve(diag(N)+1/N*hadamard.prod((X%*%t(X)), G_extend))# A is the part of the beta update that involves matrix inversion.
+  A = solve(diag(N)+1/N*hadamard.prod((X%*%t(X)), G_extend))# A is the part of the beta update that involves matrix inversion
   # train model
   for(i in nrow(tune_seq) : 1){
     beta_IPU = I_PU(beta_hat,X_m,X,Z, I_bd,G,A,M,pi,N,p,group[-1],

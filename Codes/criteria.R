@@ -1,11 +1,11 @@
 library(pROC)
-# calculate auc
+# calculate AUC
 cal_auc <- function(y, y_hat)
 {
   as.double(pROC::auc(roc(y, y_hat, quiet = T)))
 }
 
-# calculate criteria of predictive performance
+# Calculate criteria for predictive performance
 predictive_criteria<-function(beta,X_test,Y_test,Z_test,pi,M){
   f1=0
   accuracy=0
@@ -34,7 +34,7 @@ predictive_criteria<-function(beta,X_test,Y_test,Z_test,pi,M){
 
 
 
-# calculate all criteria
+# Calculate all criteria
 cal_criteria<-function(beta_hat,beta_true,M,p0,X_test,Y_test,Z_test,pi){
   predictive_res=predictive_criteria(beta_hat,X_test,Y_test,Z_test,pi,M)
   if(ncol(beta_hat)==(p0+1)){

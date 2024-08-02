@@ -8,7 +8,7 @@ https://doi.org/10.1287/ijoc.2023.0366
 
 https://doi.org/10.1287/ijoc.2023.0366.cd
 
-Below is the BibTex for citing this version of the code.
+Below is the BibTex for citing this snapshot of the repository.
 
 ```
 @misc{CacheTest,

@@ -30,7 +30,7 @@ In credit fraud detection practice, certain fraudulent transactions often evade 
 
 ## Description
 
-This repository provides data for the problem and code for the method. The main folders are `data`and `codes`.
+This repository provides data for the problem and code for the method. The main folders are `data`and `code`.
 
 - `data`: This folder includes the data used in the paper.
 - `code`: This folder contains the source code and the code for experimental comparison.

@@ -40,7 +40,7 @@ This repository provides data for the problem and code for the method. The main 
 
 ## Replicating
 
-The `codes` folder contains all the code which implements the framework of this paper. 
+The `code` folder contains all the code which implements the framework of this paper. 
 
 * `I-PU.R` contains functions for building and optimizing the I-PU model
 * Comparison Methods

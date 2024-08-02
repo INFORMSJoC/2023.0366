@@ -17,8 +17,7 @@ Below is the BibTex for citing this snapshot of the repository.
 @misc{QiuIPU2024,
   author =        {Y. Qiu, Y. Chen, K. Fang, L. Yu, and K. Fang},
   publisher =     {INFORMS Journal on Computing},
-  title =         {Fraud detection by integrating multisource
-heterogeneous presence-only data},
+  title =         {Fraud detection by integrating multisource heterogeneous presence-only data},
   year =          {2024},
   doi =           {10.1287/ijoc.2023.0366.cd},
   note =          {Available for download at https://github.com/INFORMSJoC/2023.0366},

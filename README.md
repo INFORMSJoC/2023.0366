@@ -110,7 +110,7 @@ init_beta = beta_pu_grplasso
 ```{r}
 # Set the sequence for lambda1 and lambda2.
 lambda1_seq = c(seq(0.15,0.1,-0.01))
-lambda2_seq = c(seq(0.08,0.07,-0.002))
+lambda2_seq = c(seq(0.075,0.07,-0.001))
 # Train the model, and the result will return the estimated coefficients corresponding to each set of parameters, as well as the optimal parameters selected using the validation set and their corresponding indices.
 fit_IPU = I_PU_train(init_beta,X_m,X,Z,X_valid,Y_valid,Z_valid,sample_size,M,pi,N,p,group,lambda1_seq,lambda2_seq,loop=50,a = 3,rho1=1,rho2=1,beta_true = NULL)
 

@@ -1673,7 +1673,7 @@ init_beta = beta_pu_grplasso</code></pre>
 <h2>Model training and parameter selection</h2>
 <pre class="r"><code># Set the sequence for lambda1 and lambda2.
 lambda1_seq = c(seq(0.15,0.1,-0.01))
-lambda2_seq = c(seq(0.08,0.07,-0.002))
+lambda2_seq = c(seq(0.075,0.07,-0.001))
 # Train the model, and the result will return the estimated coefficients corresponding to each set of parameters, as well as the optimal parameters selected using the validation set and their corresponding indices.
 fit_IPU = I_PU_train(init_beta,X_m,X,Z,X_valid,Y_valid,Z_valid,sample_size,M,pi,N,p,group,lambda1_seq,lambda2_seq,loop=50,a = 3,rho1=1,rho2=1,beta_true = NULL)</code></pre>
 </div>
@@ -1683,7 +1683,7 @@ fit_IPU = I_PU_train(init_beta,X_m,X,Z,X_valid,Y_valid,Z_valid,sample_size,M,pi,
 beta_IPU = fit_IPU$beta_IPU_list[[best_ind]]
 print(cal_criteria(beta_IPU, beta_true, M, p0, X_test, Y_test, Z_test, pi))</code></pre>
 <pre><code>##        TPR        FPR       RMSE         f1   accuracy        auc auc_adjust 
-## 0.93750000 0.01145833 0.15842344 0.70526519 0.73372727 0.87246240 0.85670640</code></pre>
+## 0.96250000 0.01458333 0.15839510 0.70571653 0.73409091 0.87255880 0.85701488</code></pre>
 <pre class="r"><code>print(cal_criteria(beta_pu_grplasso, beta_true, M, p0, X_test, Y_test, Z_test, pi))</code></pre>
 <pre><code>##        TPR        FPR       RMSE         f1   accuracy        auc auc_adjust 
 ## 0.96250000 0.09791667 0.17141426 0.58891736 0.66636364 0.83151323 0.82612120</code></pre>

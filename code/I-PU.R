@@ -1,4 +1,4 @@
-# calculate soft 
+# Calculate soft 
 soft = function(x, tau){
   sgn = sign(x)
   x = abs(x)-tau
@@ -12,7 +12,7 @@ entrywise_prod<-function(A,b){
   return(A)
 }
 
-# Calculate MCP penalty
+# Calculate the MCP penalty
 MCP_penalty<-function(beta,lambda,a){
   return(ifelse(beta <= a*lambda, lambda*beta-beta^2/(2*a), 0.5*a*lambda^2))
 }
@@ -45,9 +45,9 @@ up_phi<-function(xi,lambda,rho1,a){
   }
   return(xi)
 }
-# This function is used to calculate phi, psi, and Delta
+# This function is used to calculate phi and Delta
 cal_diff<-function(M,p,beta,type=1){
-  # type=1 is used for calculate phi and psi, type=2 is used to calculate Delta
+  # type=1 is used to calculate phi, type=2 is used to calculate Delta
   index=1
   if(type==1){
     result=matrix(0,(M*(M-1)/2),p)

@@ -1,5 +1,5 @@
 library(pROC)
-# calculate AUC
+# Calculate AUC
 cal_auc <- function(y, y_hat)
 {
   as.double(pROC::auc(roc(y, y_hat, quiet = T)))

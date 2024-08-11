@@ -10,7 +10,6 @@ data_generate = function(seed, example, p0){
   # group : group vector without intercept
   # group_all: group vector
   # beta_true: the true coefficients
-  # Sigma : covariance of x
 
   p = p0 + 1
   if (example == 1){
